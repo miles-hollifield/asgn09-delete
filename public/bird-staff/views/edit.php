@@ -16,14 +16,15 @@ if(is_post_request()) {
 
   // Save record using post parameters
   $args = $_POST['bird'];
-  $bird->merge_attributes($args);
-  $result = $bird->save();
-
   $result = false;
-  if($result === true) {
+  $bird->merge_attributes($args);
+  $result = $bird->update();
+
+  if($result == true) {
     $_SESSION['message'] = 'The bird was updated successfully.';
-    redirect_to(url_for('/bird-staff/views/show.php?id=' . $id));
+    redirect_to(url_for('/bird-staff/views/show.php?id=' . $bird->id));
   } else {
+    echo "some error message coming soon!";
     // show errors
   }
 
